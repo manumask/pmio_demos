@@ -1,0 +1,247 @@
+<html>
+<head>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src='js/jquery.tmpl.js'></script>
+
+    <script id="classiDocsTmpl" type="text/x-jquery-tmpl">
+        <div class="classiDocs">
+        {%each result%}
+
+        <div class="col-xs-12">
+
+        <label>Record ${$index+1}</label>
+
+        <div class="pull-right">
+
+                        <label>
+                            <input type="radio" name="Document_state_${$index+1}" value="keep"  {%if ($value.Document_state == "keep") %} checked="checked" {%/if%}> Keep
+                        </label>
+                         <label>
+                            <input type="radio" name="Document_state_${$index+1}" value="modify" {%if ($value.Document_state == "modify") %} checked="checked" {%/if%} > Modify
+                        </label>
+                         <label>
+                            <input type="radio" name="Document_state_${$index+1}" value="delete" {%if ($value.Document_state == "delete") %} checked="checked" {%/if%}> Delete
+                        </label>
+                    </div>
+        </div>
+        <div class="col-xs-6">
+        <div class="panel panel-default ">
+
+        <div class="panel-heading">currentDocument</div>
+
+        <div class="panel-body">
+                <div class="form-group">
+
+                <label>Name</label>
+                <input class="form-control" name="currentDocument_name_${$index+1}" value="${$value.currentDocument.name}">
+
+                <label>File Path</label>
+                    <input class="form-control" name="currentDocument_filePath_${$index+1}" value="${$value.currentDocument.filePath}">
+
+
+                <label>Workstation</label>
+                <input class="form-control" name="currentDocument_workstation_${$index+1}" value="${$value.currentDocument.workstation}">
+        </div>
+        </div>
+        </div>
+        </div>
+
+        <div class="col-xs-6">
+
+        <div class="panel panel-default">
+
+        <div class="panel-heading">previousDocument</div>
+
+        <div class="panel-body">
+                <div class="form-group">
+
+                <label>Name</label>
+                <input class="form-control" name="previousDocument_name_${$index+1}" value="${$value.previousDocument.name}">
+
+                <label>File Path</label>
+                <input class="form-control" name="previousDocument_filePath_${$index+1}" value="${$value.previousDocument.filePath}">
+
+
+
+                <label>Workstation</label>
+                <input class="form-control" name="previousDocument_workstation_${$index+1}" value="${$value.previousDocument.workstation}">
+
+
+        </div>
+        </div>
+        </div>
+        </div>
+            {%/each%}
+        </div>
+    </script>
+
+    <script type='text/javascript'>
+        //Change this demo data for your own credentials if needed
+        var envUrl = 'https://z2udvglr.api.processmaker.io/api/v1/';
+        var accessToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjQ3N2VjNDY5ZGMyMTQ2NWNjMTZmZDBjMjNjNTAyMDAzMmUwODkxZTMwZDVhMGM2NGExZmExYWFmYWFmZjJjNjFlZmE2MjBlMDdmMjBjMGNiIn0.eyJhdWQiOiI0NjQ1NjY1NiIsImp0aSI6IjQ3N2VjNDY5ZGMyMTQ2NWNjMTZmZDBjMjNjNTAyMDAzMmUwODkxZTMwZDVhMGM2NGExZmExYWFmYWFmZjJjNjFlZmE2MjBlMDdmMjBjMGNiIiwiaWF0IjoxNTIzMDM0MjI4LCJuYmYiOjE1MjMwMzQyMjgsImV4cCI6MTU1NDU3MDIyOCwic3ViIjoiMSIsInNjb3BlcyI6W119.fOn2NWg32dYwqyiCHLn9NNeyZcWhpwBmwKasDjvJFGQ9sF5TUFKa6djJuw5s6KVX4tM1z4vaBzn-6bqndjEvQ5qyEap66g9sa1ug84URcy2_GB2bmuzrGVytLXmKTefemqqThmn5q__ipfNZDS7ZHJMv9mT5X2oNrBizobityzdldgug50ZRmTvRc2SVjCFVgpl5xXJWmeT6ykxqYCziPWY4nl57Cx79WAIITCcxVLAMHPxEXOp474LcRhmmrj24ydUnoVFG5bMieqA5YVbwB7dDfnTMcjy9XacmWt8m_q3x-lGG1v6DjZNX4vqPKQzJ_n39GzkcbDiifXDeOE5P5lwvS75ODpZmG-Ap0U1IFx1S6r1MpcnwSajf0u0mEz-GspwrdUP6SHss19Fytm6Tfc6PGt4zT-Y1UwBCYKSvpDvbOVPY-qdI6gkjGpK-IzDH_lUVU2jXQx6yAr0HzbZPChR_rEutAqeAWgXeTiNUDdU-GpaP9krAaFNbiE0sfCAk6Lau2IY_JAQtvv5XM24ucFKmfJpMQnVhbLST06t3OXO0ELymaXnEZl5omUgzWRlVyb0Bk4fZmpBYCx3iIYk2s5vth_llpSZjB-ri-PljWe9hmqmJD1hAo_fRMzZoR7F3aqLqjiwesBSxc945vt2w7JpFLS2lb3yeSImtxK2DFio';
+        var client = new axios.create({
+            baseURL: envUrl,
+            headers: {
+                "content-type": "application/json",
+                "Accept": "application/json",
+                'Authorization': 'Bearer ' + accessToken
+            }
+        });
+        var item;
+        //Change this demo data for your own credentials if needed
+
+        $(document).ready(function () {
+            $('div.alert').fadeOut();
+            $('button.send').fadeOut();
+
+            //Get params from url
+            $.urlParam = function(name){
+                var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+                if (results==null){
+                    return null;
+                }
+                else{
+                    return results[1] || 0;
+                }
+            }
+
+
+            var instanceId = decodeURIComponent($.urlParam('instance_id'));
+
+            //Get task for step 3
+
+            if (instanceId != 'null' && instanceId != 0) {
+
+                client
+                    .get('instances/'+instanceId+'/tasks/ManuallyDeleteOrModify/task_instances/delegated', { params: {
+                            per_page:1,
+                            include:'data_model'
+                        }
+                    })
+                    .then(function(response){
+                        console.log(response);
+                        if (response.data.meta.pagination.count >= 1)
+                        //Get prefilled data and set to form io and get task instace id
+                        {
+
+                            taskInstanceId = response.data.data[0].id;
+
+                            //Check data in datamodel
+                            if (response.data.included[0].attributes.dataModel.item) {
+                                item = response.data.included[0].attributes.dataModel.item;
+                                console.log(item);
+                                //convert to list of objects
+                                var result = [];
+
+                                result.push(item);
+                                console.log(result);
+
+                                $('#classiDocsTmpl').tmpl({result}).appendTo('#objects');
+                                $('input').attr('disabled','disabled');
+                                $('button.send').fadeIn(300);
+
+                            } else {
+                                $('.comment').fadeOut();
+
+                                $('div.alert').addClass('alert-info').html('No data found.').fadeIn(300);
+                            }
+
+                        } else {
+                            $('.comment').fadeOut();
+
+                            $('div.alert').addClass('alert-info').html('No data found.').fadeIn(300);
+                        }
+                    })
+                    .catch(function(response){
+                        console.log(response);
+
+                    });
+
+            } else {
+                $('div.alert').addClass('alert-warning').html('Please pass instance_id as GET param.').fadeIn(300);
+                $('.comment').fadeOut();
+            }
+
+
+            $(document).on('click', 'button.send',function () {
+
+                var data = {
+                    'data': {
+                        'type':'task_instance',
+                        'attributes': {
+                            'status':'COMPLETE',
+                            'content':{
+                                'status':$(this).data('send'),
+                                'task_6_comment' : $('textarea[name=comment]').val()
+                            }
+                        }
+                    }
+                };
+
+                client
+                    .patch('task_instances/'+taskInstanceId+'?include=data_model', data)
+                    .then(function (response) {
+                        console.log(response);
+                        $('div.alert').addClass('alert-success').html('Data successfully sent.').fadeIn(300);
+                    })
+                    .catch(function (response) {
+                        console.log(response);
+                        $('div.alert').addClass('alert-warning').html('Something gonna wrong, please check js console to investigate.').fadeIn(300);
+                    });
+            });
+
+        });
+
+
+    </script>
+</head>
+<body>
+<div class="col-xs-10 col-xs-offset-1">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Data 443 use case</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <!--Change this navigation links before publish forms in some other place-->
+                    <li><a href="index.html">Request form</a></li>
+                    <li ><a href="index1.html">Review Request<span class="sr-only">(current)</span></a></li>
+                    <li ><a href="index2.html">Requester clarify</a></li>
+                    <li ><a href="index3.html">Review Information</a></li>
+                    <li ><a href="index4.html">Review PII Information</a></li>
+                    <li class="active"><a href="index5.html">Review DSAR Information</a></li>
+                    <!--Change this navigation links before publish forms in some other place-->
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+    <div id="review-request" class="col-xs-12">
+        <div class="alert " role="alert" style="display: none;">
+
+        </div>
+        <form id="objects">
+
+
+        </form>
+        <div class="form-group comment" >
+        <label>Comment</label>
+        <textarea name="comment" class="form-control"></textarea>
+        </div>
+        <center>
+            <button type="button" class="btn btn-success send" data-send="Route someone">Route someone</button>
+            <button type="button" class="btn btn-warning send" data-send="Remove">Remove</button>
+        </center>
+    </div>
+</div>
+</body>
+</html>
