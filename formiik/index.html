@@ -6,7 +6,7 @@
 
     <script type='text/javascript'>
         //Change this demo data for your own credentials if needed
-        var webhookUrl = 'https://enz4iwhh.api.processmaker.io/api/v1/processes/Process_1/events/StartEventA/webhook';
+        var webhookUrl = 'https://511-kupn1eqe.api.processmaker.io/api/v1/processes/Process_1/events/StartEventA/webhook';
 
         //Change this demo data for your own credentials if needed
 
@@ -102,8 +102,26 @@
             <input class="form-control" value="Zone A"  name="location" >
         </div>  
         <div class="form-group">
-            <input class="form-control" type="hidden"  value="primary"  name="formId" >
-        </div>       
+            <input class="form-control" type="hidden"  value="A"  name="formIdA" >
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="hidden"  value=""  name="formIdB" >
+        </div> 
+        <div class="form-group">
+            <input class="form-control" type="hidden"  value=""  name="formIdC" >
+        </div>                        
+        <div class="form-group">
+            <input class="form-control" type="hidden" value="" name="contactNameB">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="hidden" value=0 name="salaryIncomeB">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="hidden" name="contactNameC">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="hidden" value=0 name="salaryIncomeC">
+        </div>
         <center><button type="button" class="btn btn-primary run-webhook">Submit</button></center>
         </form>
     </div>

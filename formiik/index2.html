@@ -16,8 +16,8 @@
             var request = {};
             console.log(formData);
             formData.forEach(function(val){
-                request[val.name] = {'req_clarify':false, 'search':false, 'value':val.value};
-
+              //  request[val.name] = {'req_clarify':false, 'search':false, 'value':val.value};
+              request[val.name] = {'value':val.value};
             });
             console.log(request);
             //Make request to Webhook
@@ -90,8 +90,35 @@
             <input class="form-control" value="SecondaryEmail@email.com"  name="emailB" >
         </div>
         <div class="form-group">
-                <input class="form-control" type="hidden"  value="third"  name="formId" >
-            </div>       
+            <input class="form-control" type="hidden"  value=""  name="formIdA" >
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="hidden"  value=""  name="formIdB" >
+        </div> 
+        <div class="form-group">
+            <input class="form-control" type="hidden"  value="C"  name="formIdC" >
+        </div>        
+        <div class="form-group">
+            <input class="form-control" type="hidden" value="" name="contactNameA" >
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="hidden" value=0 name="salaryIncomeA">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="hidden" value="" name="creditAmmount">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="hidden" value="" name="creditPeriod" >
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="hidden" value="" name="location" >
+        </div> 
+        <div class="form-group">
+            <input class="form-control" type="hidden" value="" name="contactNameB">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="hidden" value=0 name="salaryIncomeB">
+        </div>        
         <center><button type="button" class="btn btn-primary run-webhook">Submit</button></center>
         </form>
     </div>
