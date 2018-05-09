@@ -44,6 +44,7 @@
                             //Fill in form
                             for (var key in prefilledData) {
                                 $('form').find('input[name='+key+']').val(prefilledData[key].value);
+                                if (key == "formIdC" ){ prefilledData[key].value="C"}
                               /*  $('form').find('input[name='+key+'_req_clarify]').attr('checked', prefilledData[key].req_clarify);
                                 $('form').find('input[name='+key+'_search]').attr('checked', prefilledData[key].search);
                                 $('button.send').fadeIn(300);*/
